@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahir i Avui — Sant Fost de Campsentelles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbf2e1;
+    --paper-deep:#f3e4c4;
+    --ink:#2b2016;
+    --ink-soft:#6b5d49;
+    --cobalt:#2f63d6;
+    --violet:#8a5cf0;
+    --emerald:#1f9e6e;
+    --teal:#1aa39a;
+    --sky:#3fa9d6;
+    --coral:#e8603f;
+    --amber:#e8a71f;
+    --accent:var(--coral);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Work Sans',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.65;}
+  h1,h2,h3,.display{font-family:'Spectral',serif;font-weight:500;}
+  em{font-style:italic;color:var(--coral);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .mono{font-family:'Space Mono',monospace;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .overflow-safe{overflow-wrap:break-word;word-break:break-word;}
+  button{font:inherit;cursor:pointer;background:none;border:none;color:inherit;}
+
+  .kicker{
+    font-family:'Space Mono',monospace;
+    font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--k,var(--coral));
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;
+  }
+  .kicker::before{content:'';width:18px;height:3px;border-radius:2px;background:var(--k,var(--coral));}
+  .kicker .ref{color:var(--ink-soft);font-weight:400;}
+
+  .section{position:relative;padding:130px 0;}
+  .section-alt{background:var(--paper-deep);}
+  .section-head{max-width:640px;margin:0 0 50px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:clamp(2.1rem,4.4vw,3rem);}
+  .section-head p{margin-top:16px;color:var(--ink-soft);font-size:1.03rem;}
+
+  .frame{border-radius:10px;padding:10px;background:#fff;box-shadow:0 18px 40px rgba(43,32,22,.16);border:3px solid var(--fc,var(--coral));}
+  .frame img{border-radius:4px;}
+  .fig-cap{margin-top:10px;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--ink-soft);letter-spacing:.02em;}
+
+  .card{border-radius:12px;background:var(--paper);box-shadow:0 10px 28px rgba(43,32,22,.1);overflow:hidden;}
+
+  /* ---------------------------------------------------------
+     LEGEND
+     --------------------------------------------------------- */
+  .legend{
+    position:fixed;left:26px;top:50%;transform:translateY(-50%);z-index:95;
+    width:172px;border-radius:14px;background:rgba(255,255,255,.88);
+    box-shadow:0 14px 34px rgba(43,32,22,.18);padding:16px 16px 14px;
+  }
+  .legend-compass{display:flex;justify-content:center;margin-bottom:10px;}
+  .legend-title{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);text-align:center;margin-bottom:12px;border-bottom:2px dotted rgba(43,32,22,.2);padding-bottom:10px;}
+  .legend-item{
+    display:flex;align-items:center;gap:9px;padding:6px 0;font-family:'Space Mono',monospace;
+    font-size:.68rem;letter-spacing:.02em;color:var(--ink-soft);transition:color .25s ease;
+  }
+  .legend-item .sym{width:10px;height:10px;flex:none;border-radius:50%;background:var(--c,#ccc);opacity:.45;transition:opacity .25s ease,transform .25s ease;}
+  .legend-item.active{color:var(--ink);font-weight:700;}
+  .legend-item.active .sym{opacity:1;transform:scale(1.25);}
+  @media (max-width:1060px){.legend{display:none;}}
+  @media (min-width:1061px){
+    body{padding-left:220px;}
+    .section-alt, .participa, footer{
+      margin-left:-220px;padding-left:220px;width:calc(100% + 220px);
+    }
+    .top-hud{left:calc(50% + 110px);}
+  }
+
+  /* ---------------------------------------------------------
+     TOP HUD
+     --------------------------------------------------------- */
+  .top-hud{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:100;
+    width:min(620px,88%);display:flex;align-items:center;justify-content:space-between;
+    padding:10px 10px 10px 18px;border-radius:999px;background:rgba(255,255,255,.88);
+    box-shadow:0 14px 34px rgba(43,32,22,.16);
+  }
+  .brand{display:flex;align-items:center;gap:8px;font-family:'Spectral',serif;font-size:1.15rem;}
+  .brand .pin-dot{width:10px;height:10px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,var(--coral),var(--amber));transform:rotate(-45deg);}
+  .top-cta{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:9px 18px;border-radius:999px;background:linear-gradient(90deg,var(--coral),var(--amber));color:#fff;text-transform:uppercase;}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:999px;font-weight:600;font-size:.9rem;transition:transform .25s ease, box-shadow .25s ease;}
+  .btn-fill{background:linear-gradient(90deg,var(--coral),var(--amber));color:#fff;box-shadow:0 14px 30px rgba(232,96,63,.32);}
+  .btn-fill:hover{transform:translateY(-2px);}
+  .btn-outline{border:2px solid var(--ink);}
+  .btn-outline:hover{background:rgba(43,32,22,.06);}
+
+  .duotone-cobalt{filter:grayscale(1) contrast(1.12) brightness(.95) sepia(1) saturate(380%) hue-rotate(178deg);}
+  .duotone-violet{filter:grayscale(1) contrast(1.1) brightness(.95) sepia(1) saturate(340%) hue-rotate(230deg);}
+  .duotone-emerald{filter:grayscale(1) contrast(1.1) brightness(.98) sepia(1) saturate(320%) hue-rotate(108deg);}
+  .duotone-teal{filter:grayscale(1) contrast(1.1) brightness(.98) sepia(1) saturate(320%) hue-rotate(140deg);}
+  .duotone-sky{filter:grayscale(1) contrast(1.1) brightness(1) sepia(1) saturate(300%) hue-rotate(168deg);}
+  .duotone-coral{filter:grayscale(1) contrast(1.12) brightness(1) sepia(1) saturate(420%) hue-rotate(-18deg);}
+  .duotone-amber{filter:grayscale(1) contrast(1.08) brightness(1.04) sepia(1) saturate(380%) hue-rotate(2deg);}
+
+  /* ---------------------------------------------------------
+     HERO
+     --------------------------------------------------------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:140px 0 60px;overflow:hidden;}
+  .hero-blob{position:absolute;width:560px;height:560px;border-radius:50%;top:-160px;right:-160px;
+    background:conic-gradient(from 90deg, var(--coral),var(--amber),var(--emerald),var(--sky),var(--violet),var(--coral));
+    filter:blur(120px);opacity:.3;}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+  .hero h1{font-size:clamp(3.2rem,7vw,5.8rem);line-height:1;}
+  .hero p.lede{margin-top:20px;max-width:440px;color:var(--ink-soft);font-size:1.1rem;}
+  .hero-cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
+  .hero-photo-frame{position:relative;}
+  .hero-photo-frame .frame img{aspect-ratio:4/5;object-fit:cover;width:100%;}
+  .title-block{
+    margin-top:14px;border-radius:10px;overflow:hidden;background:#fff;
+    font-family:'Space Mono',monospace;font-size:.68rem;box-shadow:0 10px 24px rgba(43,32,22,.12);
+  }
+  .title-block .row{display:flex;border-top:1px solid rgba(43,32,22,.12);}
+  .title-block .row:first-child{border-top:none;}
+  .title-block .cell{padding:8px 12px;flex:1;}
+  .title-block .cell + .cell{border-left:1px solid rgba(43,32,22,.12);}
+  .title-block .label{color:var(--ink-soft);display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero-photo-frame{max-width:360px;margin:0 auto;}}
+
+  /* ---------------------------------------------------------
+     QUI SOM / HISTORIA
+     --------------------------------------------------------- */
+  .fig-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:54px;align-items:center;}
+  .fig-grid.rev{grid-template-columns:1.05fr .95fr;}
+  .fig-grid.rev .fig-text{order:2;}
+  .fig-grid.rev .frame{order:1;}
+  .fig-text h2{font-size:clamp(1.9rem,3.6vw,2.5rem);margin-bottom:18px;}
+  .fig-text p{color:var(--ink-soft);margin-bottom:14px;}
+  .fig-text strong{color:var(--ink);}
+  .fig-text blockquote{margin-top:18px;padding:18px 0 0;border-top:2px dotted rgba(43,32,22,.25);font-family:'Spectral',serif;font-size:1.4rem;font-style:italic;color:var(--coral);}
+  @media (max-width:900px){.fig-grid,.fig-grid.rev{grid-template-columns:1fr;}.fig-grid.rev .fig-text{order:1;}.fig-grid.rev .frame{order:2;}}
+
+  /* ---------------------------------------------------------
+     MISSIO / VISIO — now with photos
+     --------------------------------------------------------- */
+  .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+  .mv-card .mv-photo{aspect-ratio:16/9;overflow:hidden;}
+  .mv-card .mv-photo img{width:100%;height:100%;object-fit:cover;}
+  .mv-card .mv-body{padding:28px 30px 32px;}
+  .mv-card .compass-tag{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--k);margin-bottom:12px;}
+  .mv-card h3{font-size:1.7rem;margin-bottom:12px;}
+  .mv-card p{color:var(--ink-soft);font-size:.98rem;}
+  @media (max-width:820px){.mv-grid{grid-template-columns:1fr;}}
+
+  /* ---------------------------------------------------------
+     PATRIMONI — interactive map
+     --------------------------------------------------------- */
+  .map-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:start;}
+  .map-stage{position:relative;border-radius:16px;overflow:hidden;background:var(--paper-deep);aspect-ratio:1000/640;box-shadow:0 20px 50px rgba(43,32,22,.18);}
+  .map-stage svg{display:block;width:100%;height:100%;}
+  .pin{position:absolute;transform:translate(-50%,-100%);width:32px;height:32px;}
+  .pin .dot{
+    width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+    background:var(--c,var(--coral));border:3px solid #fff;display:flex;align-items:center;justify-content:center;
+    transition:transform .2s ease;box-shadow:0 4px 10px rgba(43,32,22,.3);
+  }
+  .pin .num{transform:rotate(45deg);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;color:#fff;}
+  .pin:hover .dot{transform:rotate(-45deg) scale(1.14);}
+  .pin.active .dot{transform:rotate(-45deg) scale(1.22);box-shadow:0 6px 16px rgba(43,32,22,.4);}
+  .map-caption{margin-top:12px;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+
+  .map-detail{padding:28px 26px;position:sticky;top:110px;border-top:5px solid var(--c,var(--coral));}
+  .map-detail .tagline{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--ink-soft);margin-bottom:14px;}
+  .map-detail .photo{border-radius:10px;overflow:hidden;aspect-ratio:4/3;margin-bottom:18px;}
+  .map-detail .photo img{width:100%;height:100%;object-fit:cover;}
+  .map-detail h3{font-size:1.5rem;margin-bottom:10px;}
+  .map-detail .status{
+    display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:.64rem;
+    text-transform:uppercase;letter-spacing:.06em;color:#fff;background:var(--c,var(--coral));
+    border-radius:999px;padding:5px 12px;margin-top:4px;
+  }
+  @media (max-width:900px){.map-layout{grid-template-columns:1fr;}.map-detail{position:static;}}
+
+  /* ---------------------------------------------------------
+     VITRINA / ACTIVITATS
+     --------------------------------------------------------- */
+  .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .tool-photo{aspect-ratio:4/3;overflow:hidden;}
+  .tool-photo img{width:100%;height:100%;object-fit:cover;}
+  .tool-body{padding:22px 24px 26px;}
+  .tool-card h4{font-size:1.35rem;margin-bottom:8px;}
+  .tool-card p{color:var(--ink-soft);font-size:.92rem;}
+  @media (max-width:900px){.tool-grid{grid-template-columns:1fr;}}
+
+  /* ---------------------------------------------------------
+     PARTICIPA
+     --------------------------------------------------------- */
+  .participa{position:relative;padding:160px 0;text-align:center;overflow:hidden;color:#fff;}
+  .participa-photo{position:absolute;inset:0;background-image:url('../assets/img/escultura-dona-aigua.jpg');background-size:cover;background-position:center 35%;}
+  .participa-wash{position:absolute;inset:0;background:linear-gradient(165deg, rgba(47,99,214,.85), rgba(138,92,240,.78) 45%, rgba(232,96,63,.88) 100%);mix-blend-mode:multiply;}
+  .participa-wash2{position:absolute;inset:0;background:linear-gradient(180deg, rgba(43,32,22,.25), rgba(43,32,22,.78) 80%);}
+  .participa-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;}
+  .participa h2{font-size:clamp(2.1rem,4.6vw,3.2rem);margin-bottom:18px;color:#fff;}
+  .participa p{color:#f0e8d8;margin-bottom:32px;font-size:1.06rem;}
+  .btn-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn-ghost{border:2px solid rgba(255,255,255,.6);color:#fff;}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+
+  /* ---------------------------------------------------------
+     FOOTER
+     --------------------------------------------------------- */
+  footer{background:var(--ink);color:#c9bfae;padding:50px 0 26px;border-top:6px solid;border-image:linear-gradient(90deg,var(--coral),var(--amber),var(--emerald),var(--sky),var(--violet)) 1;}
+  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-bottom:28px;border-bottom:1px dashed rgba(201,191,174,.25);}
+  .foot-brand{font-family:'Spectral',serif;font-size:1.4rem;color:var(--paper);margin-bottom:10px;}
+  .foot-col h4{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+  .foot-col a{display:block;font-size:.86rem;color:#c9bfae;margin-bottom:8px;}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:18px;font-size:.72rem;color:#8a8068;flex-wrap:wrap;gap:10px;}
+  @media (max-width:800px){.foot-grid{grid-template-columns:1fr;}}
+
+  .fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media (max-width:700px){.section{padding:88px 0;}}
+</style>
+</head>
+<body>
+
+<div class="top-hud">
+  <a class="brand" href="#top"><span class="pin-dot"></span>Ahir i Avui</a>
+  <a class="top-cta" href="#participa">Participa-hi</a>
+</div>
+
+<aside class="legend" id="legend">
+  <div class="legend-compass">
+    <svg width="34" height="34" viewBox="0 0 34 34">
+      <circle cx="17" cy="17" r="15.5" fill="none" stroke="#c9bfae" stroke-width="1"/>
+      <path d="M17 3 L20 17 L17 31 L14 17 Z" fill="#e8603f"/>
+      <path d="M3 17 L17 14 L31 17 L17 20 Z" fill="#e8a71f"/>
+    </svg>
+  </div>
+  <div class="legend-title">Llegenda</div>
+  <nav>
+    <a class="legend-item" data-target="top" style="--c:#e8603f"><span class="sym"></span>Superfície</a>
+    <a class="legend-item" data-target="origen" style="--c:#e8a71f"><span class="sym"></span>Qui som</a>
+    <a class="legend-item" data-target="missio" style="--c:#1f9e6e"><span class="sym"></span>Missió·Visió</a>
+    <a class="legend-item" data-target="patrimoni" style="--c:#2f63d6"><span class="sym"></span>Plànol</a>
+    <a class="legend-item" data-target="historia" style="--c:#8a5cf0"><span class="sym"></span>Història</a>
+    <a class="legend-item" data-target="vitrina" style="--c:#1aa39a"><span class="sym"></span>La Vitrina</a>
+    <a class="legend-item" data-target="participa" style="--c:#3fa9d6"><span class="sym"></span>Participa</a>
+  </nav>
+</aside>
+
+<section class="hero" id="top">
+  <div class="hero-blob"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker" style="--k:var(--coral)">Sant Fost de Campsentelles <span class="ref">· full 01</span></div>
+      <h1 class="overflow-safe">Ahir i <em>Avui.</em></h1>
+      <p class="lede">Memòria, patrimoni i cultura local. Del modernisme al noucentisme, una porta d'entrada a la història del nostre poble.</p>
+      <div class="hero-cta">
+        <a class="btn btn-fill" href="#participa">Participa-hi</a>
+        <a class="btn btn-outline" href="#patrimoni">Veure el patrimoni</a>
+      </div>
+    </div>
+    <div class="hero-photo-frame fade-in">
+      <div class="frame" style="--fc:var(--coral)"><img src="../assets/img/can-bastinos.jpg" alt="Can Bastinos, Sant Fost"></div>
+      <div class="fig-cap">Fig. 01 — Can Bastinos</div>
+      <div class="title-block">
+        <div class="row">
+          <div class="cell"><span class="label">Projecte</span>Ahir i Avui</div>
+          <div class="cell"><span class="label">Indret</span>Sant Fost</div>
+        </div>
+        <div class="row">
+          <div class="cell"><span class="label">Des de</span>1988</div>
+          <div class="cell"><span class="label">Plànol</span>SF · 01</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="origen">
+  <div class="wrap fig-grid">
+    <div class="frame fade-in" style="--fc:var(--amber)">
+      <img src="../assets/img/entrada-poble.jpg" alt="Entrada a Sant Fost de Campsentelles">
+      <div class="fig-cap">Fig. 02 — Entrada al poble</div>
+    </div>
+    <div class="fig-text fade-in">
+      <div class="kicker" style="--k:var(--amber)">Qui som <span class="ref">· SF-A</span></div>
+      <h2 class="overflow-safe">D'una curiositat compartida a un projecte de tot el poble</h2>
+      <p>Ahir i Avui neix de la il·lusió de dues veïnes de Can Calet i Can Coromines per conèixer millor les cases d'època del poble, la seva arquitectura i les històries que amaguen.</p>
+      <p>Aquella curiositat va anar creixent fins a convertir-se, primer en una Festa Modernista, i després en un projecte col·lectiu.</p>
+      <blockquote>«Conèixer d'on venim ens ajuda a entendre qui som avui.»</blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="missio">
+  <div class="wrap">
+    <div class="section-head center fade-in">
+      <div class="kicker" style="justify-content:center;--k:var(--emerald)">Missió i visió <span class="ref">· SF-B</span></div>
+      <h2 class="overflow-safe">Dues peces del mateix trencadís</h2>
+    </div>
+    <div class="mv-grid fade-in">
+      <div class="mv-card card">
+        <div class="mv-photo"><img src="../assets/img/xalets-noucentistes.jpg" alt="Conjunt de xalets noucentistes, Sant Fost" class="duotone-emerald"></div>
+        <div class="mv-body">
+          <div class="compass-tag" style="--k:var(--emerald)">N · Missió</div>
+          <h3>Recuperar la memòria</h3>
+          <p>Promoure l'interès, el respecte i el coneixement pel patrimoni arquitectònic i cultural de Sant Fost —modernisme i noucentisme— com a porta d'entrada a una història més àmplia.</p>
+        </div>
+      </div>
+      <div class="mv-card card">
+        <div class="mv-photo"><img src="../assets/img/bosc-arbell-marti.jpg" alt="Dos homes al bosc d'Arbell Martí, Sant Fost (1916-1922)" class="duotone-violet"></div>
+        <div class="mv-body">
+          <div class="compass-tag" style="--k:var(--violet)">S · Visió</div>
+          <h3>Una comunitat que es reconeix</h3>
+          <p>No volem convertir Sant Fost en un museu. Volem una comunitat que conegui, valori i senti com a propi el seu patrimoni, i decideixi què transmetre al futur.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="patrimoni">
+  <div class="wrap">
+    <div class="section-head fade-in">
+      <div class="kicker" style="--k:var(--cobalt)">El territori i el patrimoni <span class="ref">· SF-C</span></div>
+      <h2 class="overflow-safe">Un poble fet de capes</h2>
+      <p>Masies, pous de glaç, fonts i vestigis gairebé invisibles expliquen com ha anat canviant Sant Fost. Tria un punt del plànol per veure'n la fitxa.</p>
+    </div>
+    <div class="map-layout fade-in">
+      <div>
+        <div class="map-stage" id="mapStage">
+          <svg viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <radialGradient id="forest" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#1f9e6e" stop-opacity=".28"/>
+                <stop offset="100%" stop-color="#1f9e6e" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect x="0" y="0" width="1000" height="640" fill="#f3e4c4"/>
+            <ellipse cx="740" cy="190" rx="220" ry="170" fill="url(#forest)"/>
+            <ellipse cx="160" cy="110" rx="170" ry="130" fill="url(#forest)"/>
+            <path d="M0 520 Q 300 560 600 525 T 1000 540 L1000 640 L0 640 Z" fill="#3fa9d6" opacity=".22"/>
+            <path d="M0 520 Q 300 560 600 525 T 1000 540" stroke="#3fa9d6" stroke-opacity=".55" stroke-width="3" fill="none"/>
+            <path d="M-20 600 Q 300 650 650 600 Q 900 570 1020 610" stroke="#2b2016" stroke-width="14" stroke-opacity=".1" fill="none"/>
+            <path d="M120 560 Q 250 480 230 430 Q 300 360 430 300 Q 300 200 160 120" stroke="#e8a71f" stroke-width="3" stroke-dasharray="1 11" stroke-linecap="round" fill="none"/>
+            <path d="M430 300 Q 600 220 740 180 Q 770 200 790 220" stroke="#e8a71f" stroke-width="3" stroke-dasharray="1 11" stroke-linecap="round" fill="none"/>
+            <g stroke="#2b2016" stroke-opacity=".25" stroke-width="1.5">
+              <rect x="390" y="260" width="46" height="34" rx="3" fill="#e8603f" fill-opacity=".55"/>
+              <rect x="445" y="275" width="38" height="30" rx="3" fill="#e8a71f" fill-opacity=".55"/>
+              <rect x="400" y="300" width="34" height="26" rx="3" fill="#8a5cf0" fill-opacity=".4"/>
+              <rect x="455" y="235" width="30" height="28" rx="3" fill="#e8603f" fill-opacity=".45"/>
+            </g>
+            <g fill="#1f9e6e" fill-opacity=".55">
+              <circle cx="700" cy="140" r="8"/><circle cx="722" cy="156" r="7"/><circle cx="684" cy="162" r="7"/>
+              <circle cx="150" cy="88" r="8"/><circle cx="172" cy="104" r="7"/><circle cx="128" cy="108" r="6"/>
+              <circle cx="640" cy="200" r="7"/><circle cx="662" cy="216" r="6"/>
+              <circle cx="300" cy="480" r="7"/><circle cx="322" cy="496" r="6"/>
+            </g>
+          </svg>
+
+          <button class="pin" style="left:43%;top:46.9%;--c:#2f63d6" data-site="esglesia"><span class="dot"><span class="num">1</span></span></button>
+          <button class="pin" style="left:48%;top:42.2%;--c:#8a5cf0" data-site="creu"><span class="dot"><span class="num">2</span></span></button>
+          <button class="pin" style="left:74%;top:28.1%;--c:#1f9e6e" data-site="pouglac"><span class="dot"><span class="num">3</span></span></button>
+          <button class="pin" style="left:79%;top:34.4%;--c:#1aa39a" data-site="bassa"><span class="dot"><span class="num">4</span></span></button>
+          <button class="pin" style="left:23%;top:67.2%;--c:#3fa9d6" data-site="font"><span class="dot"><span class="num">5</span></span></button>
+          <button class="pin" style="left:12%;top:87.5%;--c:#e8603f" data-site="peatge"><span class="dot"><span class="num">6</span></span></button>
+          <button class="pin" style="left:16%;top:18.75%;--c:#e8a71f" data-site="ruines"><span class="dot"><span class="num">7</span></span></button>
+        </div>
+        <div class="map-caption">
+          <span>Plànol il·lustratiu — no és una representació geogràfica exacta</span>
+          <span>0 — 100 — 200 m</span>
+        </div>
+      </div>
+
+      <div class="map-detail card" id="mapDetail"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="historia">
+  <div class="wrap fig-grid rev">
+    <div class="fig-text fade-in">
+      <div class="kicker" style="--k:var(--violet)">Història i protagonistes <span class="ref">· SF-D</span></div>
+      <h2 class="overflow-safe">Finals del segle XIX, principis del XX</h2>
+      <p>Quan algunes famílies venien a estiuejar al poble i es construïen cases d'època, algunes vinculades a l'arquitecte <strong>Mariano Romaní</strong>.</p>
+      <p>Els protagonistes són totes les persones que han construït Sant Fost: famílies, treballadors, comerciants, artistes i veïns i veïnes sovint fora dels grans relats històrics.</p>
+      <p>La Festa Modernista ja va permetre elaborar una mostra il·lustrada dedicada a les <strong>Cases d'en Mariano Romaní</strong> i una Auca sobre el Prat d'en Jeroni.</p>
+    </div>
+    <div class="frame fade-in" style="--fc:var(--violet)">
+      <img src="../assets/img/aplec-jaimista-1919.jpg" alt="Aplec Jaimista, 1919" class="duotone-coral">
+      <div class="fig-cap">Fig. 03 — Aplec Jaimista, 1919</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="vitrina">
+  <div class="wrap">
+    <div class="section-head center fade-in">
+      <div class="kicker" style="justify-content:center;--k:var(--teal)">La Vitrina i les activitats <span class="ref">· SF-E</span></div>
+      <h2 class="overflow-safe">Investigar, documentar i fer viure la memòria</h2>
+    </div>
+    <div class="tool-grid fade-in">
+      <div class="tool-card card">
+        <div class="tool-photo"><img src="../assets/img/gravat-antic.jpg" alt="Gravat antic de Sant Fost" class="duotone-teal"></div>
+        <div class="tool-body"><h4>La Vitrina</h4><p>Revista de memòria, patrimoni i cultura local, amb els ulls posats tant en l'ahir com en l'avui.</p></div>
+      </div>
+      <div class="tool-card card">
+        <div class="tool-photo"><img src="../assets/img/aplec-jaimista-1919.jpg" alt="Aplec Jaimista, 1919" class="duotone-coral"></div>
+        <div class="tool-body"><h4>Festa Modernista</h4><p>De transició al Noucentisme. Itineraris, teatre, música i activitats familiars, any rere any.</p></div>
+      </div>
+      <div class="tool-card card">
+        <div class="tool-photo"><img src="../assets/img/escultura-avi-pages.jpg" alt="Escultura l'avi pagès, Sant Fost" class="duotone-amber"></div>
+        <div class="tool-body"><h4>Testimonis orals</h4><p>Recollim records de veïns i veïnes: allò que no es troba en cap document.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="participa" id="participa">
+  <div class="participa-photo"></div>
+  <div class="participa-wash"></div>
+  <div class="participa-wash2"></div>
+  <div class="wrap participa-inner fade-in">
+    <div class="kicker" style="justify-content:center;--k:#fff">Participa <span class="ref" style="color:#f0e8d8">· SF-F</span></div>
+    <h2 class="overflow-safe">Tens una fotografia, un document o un record?</h2>
+    <p>La ciutadania és una part essencial del projecte. Qualsevol aportació pot convertir-se en la propera peça d'aquest trencadís col·lectiu.</p>
+    <div class="btn-row">
+      <a class="btn btn-fill" href="mailto:info@ahiriavui.cat">Comparteix un record</a>
+      <a class="btn btn-ghost" href="#vitrina">Descobreix La Vitrina</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Ahir i Avui</div>
+        <p>Associació per a la memòria, el patrimoni i la cultura de Sant Fost de Campsentelles.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explora</h4>
+        <a href="#origen">Qui som</a>
+        <a href="#patrimoni">Patrimoni</a>
+        <a href="#vitrina">La Vitrina</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacte</h4>
+        <a href="mailto:info@ahiriavui.cat">info@ahiriavui.cat</a>
+        <a href="#participa">Aporta un record</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Ahir i Avui — Sant Fost de Campsentelles</span>
+      <span>Fotografies: Wikimedia Commons (Sant Fost de Campsentelles) — vegeu crèdits</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const sites = {
+    esglesia:{n:'01',title:"L'església de Sant Fost",img:'esglesia.jpg',duo:'duotone-cobalt',c:'#2f63d6'},
+    creu:{n:'02',title:'Creu processional',img:'creu-processional.jpg',duo:'duotone-violet',c:'#8a5cf0'},
+    pouglac:{n:'03',title:'El pou de glaç',img:'pou-glac.jpg',duo:'duotone-emerald',c:'#1f9e6e'},
+    bassa:{n:'04',title:'La bassa',img:'pou-glac-bassa.jpg',duo:'duotone-teal',c:'#1aa39a'},
+    font:{n:'05',title:'La font, per Josep Salvany',img:'font.jpg',duo:'duotone-sky',c:'#3fa9d6'},
+    peatge:{n:'06',title:'El peatge, avui autopista',img:'peatge-restes.jpg',duo:'duotone-coral',c:'#e8603f'},
+    ruines:{n:'07',title:'Ruïnes de Sant Martinet',img:'ruines-sant-martinet.jpg',duo:'duotone-amber',c:'#e8a71f'}
+  };
+
+  const pins = document.querySelectorAll('.pin');
+  const detail = document.getElementById('mapDetail');
+
+  function renderSite(id){
+    const s = sites[id];
+    if(!s) return;
+    detail.style.setProperty('--c', s.c);
+    detail.innerHTML = `
+      <div class="tagline">Plànol · punt ${s.n}</div>
+      <div class="photo"><img src="../assets/img/${s.img}" alt="${s.title}" class="${s.duo}"></div>
+      <h3 class="overflow-safe">${s.title}</h3>
+      <div class="status">En investigació</div>
+    `;
+    pins.forEach(p=>p.classList.toggle('active', p.dataset.site===id));
+  }
+
+  pins.forEach(p=>{
+    p.addEventListener('click', ()=>renderSite(p.dataset.site));
+  });
+  renderSite('esglesia');
+
+  const legendItems = document.querySelectorAll('.legend-item');
+  legendItems.forEach(item=>{
+    item.addEventListener('click', e=>{
+      e.preventDefault();
+      const target = document.getElementById(item.dataset.target);
+      if(target) target.scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  const sectionIds = ['top','origen','missio','patrimoni','historia','vitrina','participa'];
+  const sectionEls = sectionIds.map(id=>document.getElementById(id)).filter(Boolean);
+  const sectionObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        legendItems.forEach(it=>it.classList.toggle('active', it.dataset.target===id));
+      }
+    });
+  }, {threshold:0, rootMargin:'-45% 0px -45% 0px'});
+  sectionEls.forEach(el=>sectionObserver.observe(el));
+
+  const fadeObserver = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:.12});
+  document.querySelectorAll('.fade-in').forEach(el=>fadeObserver.observe(el));
+</script>
+</body>
+</html>
