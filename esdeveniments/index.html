@@ -97,6 +97,15 @@
   .note-box p{color:var(--ink-soft);}
   .note-box strong{color:var(--ink);}
 
+  .article-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .article-tile{display:block;padding:28px 26px;transition:transform .25s ease, box-shadow .25s ease;}
+  .article-tile:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(43,32,22,.14);}
+  .article-tile h3{font-size:1.3rem;margin-bottom:10px;}
+  .article-tile p{color:var(--ink-soft);font-size:.94rem;margin-bottom:16px;}
+  .article-tile .status{background:var(--ac,var(--coral));}
+  .tile-link{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.03em;color:var(--ac,var(--coral));}
+  @media (max-width:700px){.article-grid{grid-template-columns:1fr;}}
+
   footer{background:var(--ink);color:#c9bfae;padding:50px 0 26px;border-top:6px solid;border-image:linear-gradient(90deg,var(--coral),var(--amber),var(--emerald),var(--sky),var(--violet)) 1;}
   .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-bottom:28px;border-bottom:1px dashed rgba(201,191,174,.25);}
   .foot-brand{font-family:'Spectral',serif;font-size:1.4rem;color:var(--paper);margin-bottom:10px;}
@@ -129,7 +138,7 @@
 <section class="section">
   <div class="wrap">
     <div class="event-card card">
-      <div class="ev-photo"><img src="../assets/img/festa-modernista-2026.jpg" alt="Participants de la primera Festa Modernista de Sant Fost, abril del 2026"></div>
+      <div class="ev-photo"><img src="../../assets/img/festa-modernista-2026.jpg" alt="Participants de la primera Festa Modernista de Sant Fost, abril del 2026"></div>
       <div class="ev-body">
         <div class="status">Primera edició · abril 2026</div>
         <h3>Festa Modernista</h3>
@@ -145,7 +154,43 @@
   </div>
 </section>
 
-<section class="section section-alt" id="participa">
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" style="--k:var(--amber)">El territori <span class="ref">· SF</span></div>
+      <h2 class="overflow-safe">El Coll de Montalegre, article per article</h2>
+      <p>Quatre peces sobre el mateix racó de Sant Fost —el Cau Brunet, la Conreria, la Colònia Bosc i la Font de les Monges— que neixen d'un mateix text de treball i que anirem ampliant a mesura que avanci la investigació.</p>
+    </div>
+    <div class="article-grid">
+      <a class="card article-tile" href="el-cau-brunet/index.html" style="--ac:var(--cobalt)">
+        <div class="status" style="background:var(--cobalt)">En investigació</div>
+        <h3>El Cau Brunet</h3>
+        <p>La torre miranda noucentista de Llorenç Brunet, construïda el 1916 com a museu, estudi i punt de trobada d'excursionistes.</p>
+        <span class="tile-link">Llegir l'article →</span>
+      </a>
+      <a class="card article-tile" href="la-conreria/index.html" style="--ac:var(--emerald)">
+        <div class="status" style="background:var(--emerald)">En investigació</div>
+        <h3>La Conreria</h3>
+        <p>De l'ermita de Santa Maria de Montalegre i les dones deodonades del segle XII a l'hostal de la família Autonell.</p>
+        <span class="tile-link">Llegir l'article →</span>
+      </a>
+      <a class="card article-tile" href="colonia-bosc-de-montalegre/index.html" style="--ac:var(--amber)">
+        <div class="status" style="background:var(--amber)">En investigació</div>
+        <h3>La Colònia Bosc</h3>
+        <p>La primera urbanització d'estiueig de l'Estat espanyol: l'arquitecte Joan Amigó i Barriga, el Mas Po-Canyadó i el Turó del Reig.</p>
+        <span class="tile-link">Llegir l'article →</span>
+      </a>
+      <a class="card article-tile" href="la-font-de-les-monges/index.html" style="--ac:var(--teal)">
+        <div class="status" style="background:var(--teal)">En investigació</div>
+        <h3>La Font de les Monges</h3>
+        <p>Un edifici mític del segle XIII, els aplecs de sardanes dels anys 20 i les llegendes que encara li acompanyen.</p>
+        <span class="tile-link">Llegir l'article →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="participa">
   <div class="wrap" style="text-align:center;">
     <div class="kicker" style="justify-content:center;--k:var(--rose)">Participa</div>
     <h2 class="overflow-safe" style="margin-bottom:16px;">Vols que t'avisem de la propera edició?</h2>

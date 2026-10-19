@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Colònia Bosc — Ahir i Avui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbf2e1;
+    --paper-deep:#f3e4c4;
+    --ink:#2b2016;
+    --ink-soft:#6b5d49;
+    --cobalt:#2f63d6;
+    --violet:#8a5cf0;
+    --emerald:#1f9e6e;
+    --teal:#1aa39a;
+    --sky:#3fa9d6;
+    --coral:#e8603f;
+    --amber:#e8a71f;
+    --rose:#d9487a;
+    --accent:var(--coral);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Work Sans',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.65;}
+  h1,h2,h3,.display{font-family:'Spectral',serif;font-weight:500;}
+  em{font-style:italic;color:var(--coral);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .mono{font-family:'Space Mono',monospace;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .overflow-safe{overflow-wrap:break-word;word-break:break-word;}
+  button{font:inherit;cursor:pointer;background:none;border:none;color:inherit;}
+
+  .kicker{
+    font-family:'Space Mono',monospace;
+    font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--k,var(--coral));
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;
+  }
+  .kicker::before{content:'';width:18px;height:3px;border-radius:2px;background:var(--k,var(--coral));}
+  .kicker .ref{color:var(--ink-soft);font-weight:400;}
+
+  .section{position:relative;padding:130px 0;}
+  .section-alt{background:var(--paper-deep);}
+  .section-head{max-width:640px;margin:0 0 50px;}
+  .section-head h2{font-size:clamp(2.1rem,4.4vw,3rem);}
+  .section-head p{margin-top:16px;color:var(--ink-soft);font-size:1.03rem;}
+
+  .card{border-radius:12px;background:var(--paper);box-shadow:0 10px 28px rgba(43,32,22,.1);overflow:hidden;}
+
+  .top-hud{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:100;
+    width:min(760px,92%);display:flex;align-items:center;justify-content:space-between;
+    padding:10px 10px 10px 18px;border-radius:999px;background:rgba(255,255,255,.9);
+    box-shadow:0 14px 34px rgba(43,32,22,.16);gap:14px;
+  }
+  .brand{display:flex;align-items:center;gap:8px;font-family:'Spectral',serif;font-size:1.1rem;flex:none;}
+  .brand .pin-dot{width:10px;height:10px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,var(--coral),var(--amber));transform:rotate(-45deg);}
+  .top-nav{display:flex;align-items:center;gap:20px;font-family:'Space Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);}
+  .top-nav a:hover, .top-nav a.active{color:var(--ink);}
+  .top-cta{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:9px 18px;border-radius:999px;background:linear-gradient(90deg,var(--coral),var(--amber));color:#fff;text-transform:uppercase;flex:none;}
+  @media (max-width:700px){.top-nav{display:none;}}
+
+  .page-hero{padding:170px 0 60px;}
+  .page-hero .kicker{justify-content:flex-start;}
+  .page-hero h1{font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.05;max-width:760px;}
+  .page-hero p.lede{margin-top:20px;max-width:560px;color:var(--ink-soft);font-size:1.1rem;}
+
+  .status{
+    display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:.64rem;
+    text-transform:uppercase;letter-spacing:.06em;color:#fff;background:var(--rose);
+    border-radius:999px;padding:5px 12px;margin-top:14px;width:fit-content;
+  }
+
+  .article-body{max-width:720px;}
+  .article-body h2{font-size:1.4rem;margin:44px 0 16px;}
+  .article-body p{margin-bottom:18px;color:var(--ink-soft);}
+  .article-body p strong{color:var(--ink);}
+  .article-body em{font-style:italic;color:var(--ink);}
+
+  .note-box{margin:28px 0;padding:26px 28px;border-radius:12px;background:var(--paper-deep);border-left:4px solid var(--rose);}
+  .note-box p{color:var(--ink-soft);margin-bottom:0;}
+  .note-box strong{color:var(--ink);}
+  .note-box ul{margin:10px 0 0 18px;color:var(--ink-soft);}
+
+  .cross-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  .cross-tile{display:block;padding:22px;}
+  .cross-tile:hover{box-shadow:0 14px 28px rgba(43,32,22,.12);}
+  .cross-tile span{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.03em;text-transform:uppercase;color:var(--ac,var(--coral));}
+  .cross-tile h4{font-size:1.02rem;margin-top:6px;}
+  @media (max-width:820px){.cross-grid{grid-template-columns:1fr;}}
+
+  footer{background:var(--ink);color:#c9bfae;padding:50px 0 26px;border-top:6px solid;border-image:linear-gradient(90deg,var(--coral),var(--amber),var(--emerald),var(--sky),var(--violet)) 1;}
+  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-bottom:28px;border-bottom:1px dashed rgba(201,191,174,.25);}
+  .foot-brand{font-family:'Spectral',serif;font-size:1.4rem;color:var(--paper);margin-bottom:10px;}
+  .foot-col h4{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+  .foot-col a{display:block;font-size:.86rem;color:#c9bfae;margin-bottom:8px;}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:18px;font-size:.72rem;color:#8a8068;flex-wrap:wrap;gap:10px;}
+  @media (max-width:800px){.foot-grid{grid-template-columns:1fr;}}
+
+  @media (max-width:700px){.section{padding:88px 0;}.page-hero{padding:150px 0 50px;}}
+</style>
+</head>
+<body>
+
+<div class="top-hud">
+  <a class="brand" href="../../index.html#top"><span class="pin-dot"></span>Ahir i Avui</a>
+  <nav class="top-nav">
+    <a href="../../index.html#top">Inici</a>
+    <a href="../index.html" class="active">Esdeveniments</a>
+    <a href="../../noticies/index.html">Notícies</a>
+  </nav>
+  <a class="top-cta" href="../../index.html#participa">Participa-hi</a>
+</div>
+
+<section class="page-hero wrap" id="top">
+  <div class="kicker" style="--k:var(--amber)">El territori <span class="ref">· Coll de Montalegre</span></div>
+  <h1 class="overflow-safe">La Colònia Bosc</h1>
+  <p class="lede">Considerada la primera urbanització d'estiueig de l'Estat espanyol: un projecte de Gonçal Arnús i Pallós i Francesc Artigues i Solà, dissenyat per l'arquitecte Joan Amigó i Barriga.</p>
+  <div class="status" style="background:var(--amber)">En investigació</div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="article-body">
+      <p>La Colònia Bosc de Montalegre no és una urbanització tal com la podem concebre avui dia: és un tresor arquitectònic, històric i paisatgístic, malauradament molt desconegut per la majoria de santfostencs i santfostenques. Tant la Colònia Bosc com tot l'entorn de la Conreria són un món proper però molt desconegut, i un dels objectius d'aquest article és apropar aquesta joia, aquest entorn, no només als santfostencs sinó a tots els lectors.</p>
+
+      <p>Els promotors d'aquest projecte, que va sorgir a l'entorn de la Conreria, van ser un dels hereus d'Evarist Arnús (banquer i financer barceloní molt conegut i reputat) —en concret, Gonçal Arnús i Pallós— i Francesc Artigues i Solà, promotor immobiliari. Arnús es va fer amb aquests terrenys amb la idea de fer-hi una dotzena de «xalets» en aquesta part propera al Coll de Montalegre; el lloc, a més d'estar en un indret idoni paisatgísticament, era molt recomanat per metges reputats que freqüentaven la zona amb altres famílies benestants, i que de vegades hi passaven temporades, a les cel·les del que havia estat el monestir o convent de Santa Maria de Montalegre.</p>
+
+      <div class="note-box" style="border-left-color:var(--amber)">
+        <p><strong>Fil obert, pendent de desenvolupar:</strong> Joan Gamper i el primer partit d'hoquei sobre herba a Espanya, vinculat a aquest indret. Apuntat a l'original però sense cap dada encara —es manté com a nota de treball per a futura investigació.</p>
+      </div>
+
+      <p>L'encàrrec del projecte va recaure en l'arquitecte modernista/noucentista badaloní Joan Amigó i Barriga. Era un projecte d'urbanització d'estiueig, amb el seu traçat de camins, parcel·lació de finques, establiment de serveis comuns, conservació de camins, quiosc...</p>
+
+      <p>El projecte es va fer amb unes normes que avui dia en diríem molt ecologistes: s'havien d'intentar conservar els camins existents —els que feien servir els cartoixans de la propera Cartoixa de Montalegre, els carboners, els llenyataires—; hi havia normes d'edificació racionals: les parcel·les havien de tenir una superfície prou gran, calia certa distància entre una torre i una altra, les parcel·les no es podien tancar amb mur —només es permetien tanques de filferro o arbustos—, amb l'objectiu de no trencar el paisatge, fins al punt de convocar un concurs de tancaments jutjat per prestigiosos arquitectes. L'enjardinament havia de respectar els arbres i la vegetació autòctona (pins, alzines, roures, arboços, etc.).</p>
+
+      <h2>El Mas Po-Canyadó i Jaume Botey</h2>
+      <p>Artigues va pagar en espècies a Amigó: el va deixar escollir la parcel·la que volgués, amb la condició de construir-hi. Els textos diuen que va triar la vista més privilegiada, tot i que en això potser algú hi discreparia, ja que segurament la millor vista és la del Turó del Reig o la de l'altre vessant, al camí antic de Martorelles —però allà hi ha bastant pendent, i ja hi havia el cementiri de la febre groga.</p>
+
+      <p>Joan Amigó es va fer construir la seva casa davant del Cau Brunet: és el Mas Po-Canyadó (1918, data oficial), una de les cases més boniques de la urbanització, i aquesta data es pren com a referència de la construcció de la Colònia Bosc, tot i que algunes cases segurament ja es van construir anys abans. Amigó va fer una rèplica de la casa que la seva família tenia al centre de Badalona, molt a prop d'on avui és la Via Augusta: es deia també Mas Po-Canyadó —avui enderrocada— i és el mateix nom que té la casa de la Colònia Bosc. El seu padrastre i mestre d'obres, el molt reputat Jaume Botey, era reaci a deixar la casa de Badalona, així que Joan Amigó en va fer també una rèplica de l'interior, amb l'habitació de Jaume Botey igual, inclosos els mobles, perquè Jaume s'hi sentís ben còmode, ja que no es volia moure de casa seva.</p>
+
+      <p>A la façana de l'actual casa del Mas Po-Canyadó es pot veure l'escut de Catalunya dissenyat per Domènech i Montaner com a ensenya de la Renaixença. Avui dia és una casa de colònies de la Fundació Pere Tarrés.</p>
+
+      <h2>Del Turó del Reig al sector de l'Illa</h2>
+      <p>Així, a poc a poc, es van anar construint els «xalets», en una disposició semblant a una espiral que arribava fins al punt més alt, el Turó del Reig (368 m), on també hi ha una casa. Les cases eren evidentment destinades a la burgesia de Barcelona o a la classe benestant, que donaria nom a aquesta urbanització. A la premsa barcelonina sortien anuncis de «chalets a plazos desde 1.000 pesetas».</p>
+
+      <p>Molta burgesia barcelonina, i d'altres llocs, pujava fins a la Colònia Bosc i el seu entorn amb tartanes; els més privilegiats, en cotxe, des de Barcelona, o bé des de l'estació de tren de Badalona o Montgat, passant per Tiana. Hi ha molt de vincle entre la Colònia Bosc de Montalegre i Tiana, tot i que gairebé la totalitat de la seva superfície pertany a Sant Fost, amb una petita part a Tiana. De fet, Joan Soler i Amigó, en el seu article «L'avi Joan» —on parla del seu avi Joan Amigó i Barriga, arquitecte de la urbanització—, comenta que el telèfon de la Colònia era el número 3 de Tiana.</p>
+
+      <p>A l'altre costat de la B-500 hi ha l'anomenat sector de l'Illa, en referència al Camí de l'Illa. Hi trobarem cases construïdes als anys 60, amb carrers estrets, però també diverses cases que —encara que de moment no sabem quan es van construir— tenen una fisonomia molt semblant a la dels «xalets» de la zona del Turó del Reig. Allà hi ha també diversos punts d'interès: els antics forns de ceràmica de 1778, la mina de la Font dels Horts del Monjos, la caseta d'en Nofre, la desapareguda plaça del Repòs dels Frares, algunes mines d'aigua, la desapareguda escola Espot, el salt d'aigua del Sot dels Ànecs, les ruïnes de l'hotel l'Encinar o hotel Dalmases, i el gran forn de ceràmica del Camí dels Castanyers.</p>
+
+      <div class="note-box" style="border-left-color:var(--amber)">
+        <p><strong>Pendent de documentar:</strong></p>
+        <ul>
+          <li>Semblança biogràfica de Joan Amigó i Barriga («Inici històric», apuntat a l'original però no redactat).</li>
+          <li>Datació de les cases del sector de l'Illa amb fisonomia de xalet noucentista.</li>
+          <li>Els llocs d'interès del sector de l'Illa (forns de ceràmica, Font dels Horts del Monjos, caseta d'en Nofre, etc.) — només esmentats de passada, sense fitxa pròpia encara.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" style="--k:var(--amber)">Segueix llegint</div>
+      <h2 class="overflow-safe">Altres peces del mateix territori</h2>
+    </div>
+    <div class="cross-grid">
+      <a class="card cross-tile" href="../el-cau-brunet/index.html" style="--ac:var(--cobalt)"><span>El Cau Brunet</span><h4>La torre miranda de Llorenç Brunet</h4></a>
+      <a class="card cross-tile" href="../la-conreria/index.html" style="--ac:var(--emerald)"><span>La Conreria</span><h4>De l'ermita medieval a l'hostal Autonell</h4></a>
+      <a class="card cross-tile" href="../la-font-de-les-monges/index.html" style="--ac:var(--teal)"><span>La Font de les Monges</span><h4>Llegendes i aplecs de sardanes</h4></a>
+    </div>
+    <p style="margin-top:28px;"><a href="../index.html" style="text-decoration:underline">← Tornar a Esdeveniments</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Ahir i Avui</div>
+        <p>Associació per a la memòria, el patrimoni i la cultura de Sant Fost de Campsentelles.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explora</h4>
+        <a href="../../index.html#origen">Qui som</a>
+        <a href="../../index.html#patrimoni">Patrimoni</a>
+        <a href="../../index.html#vitrina">La Vitrina</a>
+        <a href="../index.html">Esdeveniments</a>
+        <a href="../../noticies/index.html">Notícies</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacte</h4>
+        <a href="mailto:info@ahiriavui.cat">info@ahiriavui.cat</a>
+        <a href="../../index.html#participa">Aporta un record</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Ahir i Avui — Sant Fost de Campsentelles</span>
+      <span>Fotografies: Wikimedia Commons (Sant Fost de Campsentelles) — vegeu crèdits</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
