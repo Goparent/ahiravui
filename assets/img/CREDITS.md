@@ -1,6 +1,25 @@
 # Crèdits de les imatges
 
-Totes les imatges són de Sant Fost de Campsentelles, obtingudes a Wikimedia Commons amb llicència lliure. Abans de publicar la web caldrà mantenir aquesta atribució (llicències CC BY-SA exigeixen atribució) o substituir-les per fotografies pròpies de l'associació.
+Totes les imatges, excepte les indicades com a material propi, són de Sant Fost de Campsentelles, obtingudes a Wikimedia Commons amb llicència lliure. Abans de publicar la web caldrà mantenir aquesta atribució (llicències CC BY-SA exigeixen atribució) o substituir-les per fotografies pròpies de l'associació.
+
+## Material propi de l'associació
+
+| Fitxer | Descripció | Font |
+|---|---|---|
+| festa-modernista-2026.jpg | Participants de la primera Festa Modernista de Sant Fost (abril 2026) | Fotografia pròpia d'Ahir i Avui, lliurada pel client el 2026-10-19 |
+
+## Pobles de Catalunya / Arquitectura Modernista (ús autoritzat pel client)
+
+El client ha confirmat disposar de permís d'aquests dos webs per fer servir les fotografies i per eliminar-ne la marca d'aigua. **Només a `mapa-de-colors`**, i sense identificar l'edifici concret (el client no ha confirmat quina casa és cadascuna), substituint fotos genèriques de Wikimedia Commons. Marca d'aigua retallada per la vora inferior de la imatge (sense retoc, sense pèrdua de qualitat a la resta de la foto).
+
+| Fitxer | Descripció | Font original | Fitxer font (Downloads) |
+|---|---|---|---|
+| casa-epoca-balco.jpg | Casa d'època amb balcó i escalinata (edifici no identificat) | Pobles de Catalunya | 112314.jpeg |
+| xalet-noucentista-ornamentat.jpg | Xalet noucentista amb ornamentació (edifici no identificat) | Arquitectura Modernista | 037954.jpeg |
+
+Queden disponibles a `/Users/alejandro/Downloads/cropped_preview/` altres 4 fotografies retallades (112209, 112212, 112214, 038006) sense usar encara a la web, més 2 sense marca d'aigua en origen (96187-1101.jpg, `House_in_carrer_Emili_Monturiol,_111.jpg`) — cap de les dues úniques amb hueco genèric compatible a la pàgina actual.
+
+## Wikimedia Commons
 
 | Fitxer | Descripció | Autor | Llicència |
 |---|---|---|---|
