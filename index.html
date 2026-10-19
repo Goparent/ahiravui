@@ -255,6 +255,7 @@
     <a class="legend-item" data-target="historia" style="--c:#8a5cf0"><span class="sym"></span>Història</a>
     <a class="legend-item" data-target="vitrina" style="--c:#1aa39a"><span class="sym"></span>La Vitrina</a>
     <a class="legend-item" data-target="esdeveniments" style="--c:#d9487a"><span class="sym"></span>Esdeveniments</a>
+    <a class="legend-item" href="noticies/index.html" style="--c:#e8a71f"><span class="sym"></span>Notícies</a>
     <a class="legend-item" data-target="participa" style="--c:#3fa9d6"><span class="sym"></span>Participa</a>
   </nav>
 </aside>
@@ -435,6 +436,7 @@
       <h2 class="overflow-safe">La festa que volem fer tornar cada any</h2>
       <p>A l'abril del 2026 es va celebrar la primera festa modernista i noucentista per a connectar amb la història i conèixer de prop la forma de vida del segle XIX. Es va ambientar amb elements i indumentària de l'època: representació teatral, cantada de l'auca, jocs infantils d'època, exposició de pintura, tallers...</p>
       <p>La voluntat de l'associació és que la Festa Modernista es converteixi en una cita anual, amb noves edicions i activitats que s'aniran anunciant. Si vols rebre'n avisos, posa't en contacte amb nosaltres.</p>
+      <p><a href="esdeveniments/index.html" style="text-decoration:underline;color:var(--rose);font-weight:600">Veure tots els esdeveniments →</a></p>
     </div>
   </div>
 </section>
@@ -467,6 +469,7 @@
         <a href="#patrimoni">Patrimoni</a>
         <a href="#vitrina">La Vitrina</a>
         <a href="#esdeveniments">Esdeveniments</a>
+        <a href="noticies/index.html">Notícies</a>
       </div>
       <div class="foot-col">
         <h4>Contacte</h4>
@@ -515,6 +518,7 @@
 
   const legendItems = document.querySelectorAll('.legend-item');
   legendItems.forEach(item=>{
+    if(!item.dataset.target) return;
     item.addEventListener('click', e=>{
       e.preventDefault();
       const target = document.getElementById(item.dataset.target);
