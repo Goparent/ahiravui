@@ -20,6 +20,7 @@
     --sky:#3fa9d6;
     --coral:#e8603f;
     --amber:#e8a71f;
+    --rose:#d9487a;
     --accent:var(--coral);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -190,7 +191,7 @@
   /* ---------------------------------------------------------
      VITRINA / ACTIVITATS
      --------------------------------------------------------- */
-  .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
   .tool-photo{aspect-ratio:4/3;overflow:hidden;}
   .tool-photo img{width:100%;height:100%;object-fit:cover;}
   .tool-body{padding:22px 24px 26px;}
@@ -253,6 +254,7 @@
     <a class="legend-item" data-target="patrimoni" style="--c:#2f63d6"><span class="sym"></span>Plànol</a>
     <a class="legend-item" data-target="historia" style="--c:#8a5cf0"><span class="sym"></span>Història</a>
     <a class="legend-item" data-target="vitrina" style="--c:#1aa39a"><span class="sym"></span>La Vitrina</a>
+    <a class="legend-item" data-target="esdeveniments" style="--c:#d9487a"><span class="sym"></span>Esdeveniments</a>
     <a class="legend-item" data-target="participa" style="--c:#3fa9d6"><span class="sym"></span>Participa</a>
   </nav>
 </aside>
@@ -415,13 +417,24 @@
         <div class="tool-body"><h4>La Vitrina</h4><p>La vitrina és una revista on es recull la memòria, patrimoni i cultura local, amb els ulls posats tant en l'ahir com en l'avui.</p></div>
       </div>
       <div class="tool-card card">
-        <div class="tool-photo"><img src="assets/img/festa-modernista-2026.jpg" alt="Participants de la primera Festa Modernista de Sant Fost, abril del 2026"></div>
-        <div class="tool-body"><h4>Festa Modernista</h4><p>A l'abril del 2026 es va celebrar la primera festa modernista i noucentista per a connectar amb la història i conèixer de prop la forma de vida del segle XIX. Es va ambientar amb elements i indumentària de l'època: representació teatral, cantada de l'auca, jocs infantils d'època, exposició de pintura, tallers...</p></div>
-      </div>
-      <div class="tool-card card">
         <div class="tool-photo"><img src="assets/img/masia-blanca.jpg" alt="Masia a Sant Fost de Campsentelles"></div>
         <div class="tool-body"><h4>Testimonis orals</h4><p>Sabem que hi ha moltes històries que no es troben en cap document.</p><p>Pretenem recollir els records, històries i anècdotes sobre el nostre poble.</p><p>En saps d'alguna? Saps d'algú que volgués explicar alguna experiència?</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="esdeveniments">
+  <div class="wrap fig-grid">
+    <div class="frame fade-in" style="--fc:var(--rose)">
+      <img src="assets/img/festa-modernista-2026.jpg" alt="Participants de la primera Festa Modernista de Sant Fost, abril del 2026">
+      <div class="fig-cap">Fig. 04 — Primera Festa Modernista, abril 2026</div>
+    </div>
+    <div class="fig-text fade-in">
+      <div class="kicker" style="--k:var(--rose)">Esdeveniments <span class="ref">· SF-F</span></div>
+      <h2 class="overflow-safe">La festa que volem fer tornar cada any</h2>
+      <p>A l'abril del 2026 es va celebrar la primera festa modernista i noucentista per a connectar amb la història i conèixer de prop la forma de vida del segle XIX. Es va ambientar amb elements i indumentària de l'època: representació teatral, cantada de l'auca, jocs infantils d'època, exposició de pintura, tallers...</p>
+      <p>La voluntat de l'associació és que la Festa Modernista es converteixi en una cita anual, amb noves edicions i activitats que s'aniran anunciant. Si vols rebre'n avisos, posa't en contacte amb nosaltres.</p>
     </div>
   </div>
 </section>
@@ -431,7 +444,7 @@
   <div class="participa-wash"></div>
   <div class="participa-wash2"></div>
   <div class="wrap participa-inner fade-in">
-    <div class="kicker" style="justify-content:center;--k:#fff">Participa <span class="ref" style="color:#f0e8d8">· SF-F</span></div>
+    <div class="kicker" style="justify-content:center;--k:#fff">Participa <span class="ref" style="color:#f0e8d8">· SF-G</span></div>
     <h2 class="overflow-safe">Tens una fotografia, un document o un record?</h2>
     <p>La ciutadania és una part essencial del projecte. Qualsevol aportació pot convertir-se en la propera peça d'aquest trencadís col·lectiu.</p>
     <div class="btn-row">
@@ -453,6 +466,7 @@
         <a href="#origen">Qui som</a>
         <a href="#patrimoni">Patrimoni</a>
         <a href="#vitrina">La Vitrina</a>
+        <a href="#esdeveniments">Esdeveniments</a>
       </div>
       <div class="foot-col">
         <h4>Contacte</h4>
@@ -508,7 +522,7 @@
     });
   });
 
-  const sectionIds = ['top','origen','missio','patrimoni','historia','vitrina','participa'];
+  const sectionIds = ['top','origen','missio','patrimoni','historia','vitrina','esdeveniments','participa'];
   const sectionEls = sectionIds.map(id=>document.getElementById(id)).filter(Boolean);
   const sectionObserver = new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
