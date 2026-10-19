@@ -16,8 +16,14 @@ El client ha confirmat disposar de permís d'aquests dos webs per fer servir les
 |---|---|---|---|
 | casa-epoca-balco.jpg | Casa d'època amb balcó i escalinata (edifici no identificat) | Pobles de Catalunya | 112314.jpeg |
 | xalet-noucentista-ornamentat.jpg | Xalet noucentista amb ornamentació (edifici no identificat) | Arquitectura Modernista | 037954.jpeg |
+| casa-carrer.jpg | Casa d'època entre pins, vista de carrer (edifici no identificat) | Pobles de Catalunya | 96187-1101.jpg |
+| casa-amb-mural.jpg | Casa d'època amb plafó/mural a la façana (edifici no identificat) | Arquitectura Modernista | House_in_carrer_Emili_Monturiol,_111.jpg |
+| masia-blanca.jpg | Masia blanca amb detalls modernistes (edifici no identificat) | Arquitectura Modernista | 038006.jpeg |
+| casa-torre-pins.jpg | Casa amb torre entre pins (edifici no identificat) | Pobles de Catalunya | 112214.jpeg |
 
-Queden disponibles a `/Users/alejandro/Downloads/cropped_preview/` altres 4 fotografies retallades (112209, 112212, 112214, 038006) sense usar encara a la web, més 2 sense marca d'aigua en origen (96187-1101.jpg, `House_in_carrer_Emili_Monturiol,_111.jpg`) — cap de les dues úniques amb hueco genèric compatible a la pàgina actual.
+Totes sis substitueixen fotos genèriques de Wikimedia Commons que no tenien nom d'edifici propi (Visió, La Vitrina, Testimonis orals, fons de Participa). **No s'han tocat** l'hero ("Can Bastinos") ni els 7 pins del plànol de Patrimoni (església, creu, pou de glaç, bassa, font, peatge, ruïnes) perquè identifiquen un edifici o indret concret i real — substituir-los per una d'aquestes fotos sense identificar seria donar una dada falsa sobre el patrimoni documentat de l'associació.
+
+Queden disponibles a `/Users/alejandro/Downloads/cropped_preview/` altres 2 fotografies retallades sense usar (112209, 112212).
 
 ## Wikimedia Commons
 
