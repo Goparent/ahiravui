@@ -60,6 +60,9 @@
   }
   .brand{display:flex;align-items:center;gap:8px;font-family:'Spectral',serif;font-size:1.1rem;flex:none;}
   .brand .pin-dot{width:10px;height:10px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,var(--coral),var(--amber));transform:rotate(-45deg);}
+  .top-nav{display:flex;align-items:center;gap:20px;font-family:'Space Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);}
+  .top-nav a:hover{color:var(--ink);}
+  @media (max-width:700px){.top-nav{display:none;}}
   .top-cta{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:9px 18px;border-radius:999px;background:linear-gradient(90deg,var(--coral),var(--amber));color:#fff;text-transform:uppercase;flex:none;}
 
   .page-hero{padding:170px 0 60px;}
@@ -105,6 +108,9 @@
 
 <div class="top-hud">
   <a class="brand" href="../../index.html#top"><span class="pin-dot"></span>Ahir i Avui</a>
+  <nav class="top-nav">
+    <a href="../../noticies/index.html">Notícies</a>
+  </nav>
   <a class="top-cta" href="../../index.html#participa">Participa-hi</a>
 </div>
 
